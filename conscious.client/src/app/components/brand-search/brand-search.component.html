@@ -1,0 +1,70 @@
+<div class="container mt-5">
+  <h3 class="text-center mb-4">Recherche de Marques et Vote</h3>
+
+  <!-- Barre de recherche -->
+  <div class="row mb-4">
+    <div class="col-md-8 mx-auto">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Rechercher une marque..."
+        [(ngModel)]="searchTerm"
+        (input)="searchBrand()"
+      />
+    </div>
+  </div>
+
+  <!-- Message de recherche -->
+  <div *ngIf="searchMessage" class="alert alert-info">
+    <strong>{{ searchMessage }}</strong>
+  </div>
+
+  <!-- Liste des marques filtrées -->
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let brand of filteredBrands">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <span [innerHTML]="highlightSearchTerm(brand.name)"></span>
+            <!-- Badge indiquant si la marque est boycottée -->
+            <span *ngIf="brand.isBoycotted" class="badge bg-danger ms-2">Boycottée</span>
+            <span *ngIf="!brand.isBoycotted" class="badge bg-success ms-2">Non Boycottée</span>
+          </h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ brand.description }}</p>
+          <button class="btn btn-primary" (click)="selectBrandForVote(brand.id)">
+            Sélectionner pour Voter
+          </button>
+          <!-- Afficher la raison du boycott si la marque est boycottée -->
+          <div *ngIf="brand.isBoycotted" class="mt-3">
+            <p class="text-danger"><strong>Boycotte:</strong> {{ brand.reason }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulaire de vote -->
+  <div *ngIf="selectedBrandId" class="mt-4">
+    <h4>Soumettre un Vote pour Boycotter</h4>
+    <div class="form-group">
+      <label for="voteReason">Raison du Boycott</label>
+      <textarea
+        id="voteReason"
+        class="form-control"
+        rows="3"
+        [(ngModel)]="voteReason"
+        placeholder="Entrez la raison du boycott"
+      ></textarea>
+    </div>
+    <button class="btn btn-danger mt-3" [disabled]="voteInProgress" (click)="submitVote()">
+      {{ voteInProgress ? 'Vote en cours...' : 'Soumettre le Vote' }}
+    </button>
+
+    <!-- Message de confirmation ou d'erreur -->
+    <div *ngIf="voteMessage" class="mt-3" [ngClass]="{'alert alert-success': voteMessage.includes('pris en compte'), 'alert alert-danger': !voteMessage.includes('pris en compte')}">
+      {{ voteMessage }}
+    </div>
+  </div>
+</div>

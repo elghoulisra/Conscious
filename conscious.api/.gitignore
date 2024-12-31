@@ -1,0 +1,73 @@
+# Ignore the following directories and files for .NET
+
+# User-specific files
+.idea/
+.vscode/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer files
+*.vsscc
+*.vspscc
+
+# .NET Core
+bin/
+obj/
+
+# ASP.NET Core
+wwwroot/
+appsettings.Development.json
+
+# Rider
+.idea/
+
+# Ignore the following directories and files for Angular
+
+# Node.js dependencies
+node_modules/
+
+# Angular build output
+/dist/
+/out-tsc/
+
+# TypeScript v1 declaration files
+typings/
+
+# Compiled JavaScript and TypeScript maps
+*.js
+*.js.map
+*.tsbuildinfo
+
+# VS Code
+.vscode/
+
+# NPM debug log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Angular CLI configuration files
+.angular/
+
+# Ignore environment-specific files
+.env
+.env.* 
+
+# Ignore coverage output from testing
+coverage/
+
+# Ignore temporary and log files
+*.log
+*.tmp
+
+# Ignore package-lock.json or yarn.lock for projects that use package manager versions
+package-lock.json
+yarn.lock
